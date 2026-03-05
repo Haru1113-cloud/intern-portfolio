@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HARUYA HAYASHI の記録</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,800;0,900;1,800&family=M+PLUS+1p:wght@400;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ════════════════════════════════
+       DESIGN TOKENS  (Hataractive 準拠)
+    ════════════════════════════════ */
+    :root {
+      --white:      #FFFFFF;
+      --bg:         #F7FAF8;   /* 極薄グリーン地 */
+      --surface:    #FFFFFF;
+      --border:     #DCE8DC;
+      --text:       #1C2622;   /* 濃いネイビーグリーン */
+      --text-2:     #4A5C55;
+      --text-3:     #8FA89F;
+      --green:      #00A86B;   /* メイングリーン */
+      --green-dk:   #007A4D;
+      --green-lt:   #E6F7F0;
+      --orange:     #F47820;   /* アクセントオレンジ */
+      --orange-lt:  #FEF3E8;
+      --teal:       #00C2A0;
+      --purple:     #6C5CE7;
+      --dark-end:   #0D1F18;   /* クロージング背景 */
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'M PLUS 1p', 'Noto Sans JP', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ════════════════════════════════
+       NAV
+    ════════════════════════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px;
+      background: rgba(255,255,255,.90);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px; font-weight: 900; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--text);
+    }
+
+    .nav-logo span { color: var(--green); }
+
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-size: 11px; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--text-2); text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--green); }
+
+    /* ════════════════════════════════
+       HERO
+    ════════════════════════════════ */
+    #hero {
+      position: relative; min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: flex-start; justify-content: center;
+      padding: 120px 10% 80px;
+      background: var(--white);
+      overflow: hidden;
+    }
+
+    /* 右側デコレーション */
+    .hero-deco {
+      position: absolute; right: -120px; top: 50%;
+      transform: translateY(-50%);
+      width: 560px; height: 560px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%,
+        var(--green-lt) 0%, rgba(0,168,107,.04) 60%, transparent 80%);
+      pointer-events: none;
+    }
+
+    .hero-deco::after {
+      content: '';
+      position: absolute; inset: 60px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(0,168,107,.15);
+    }
+
+    /* Eyebrow */
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px; font-weight: 700; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--green);
+      margin-bottom: 28px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 32px; height: 2px; background: var(--green);
+      border-radius: 2px;
+    }
+
+    /* Service badge */
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 10px 20px; border-radius: 100px; margin-bottom: 44px;
+      background: var(--green-lt);
+      border: 1px solid rgba(0,168,107,.2);
+    }
+
+    .badge-logo {
+      width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--green), var(--teal));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+
+    .badge-name {
+      font-family: 'M PLUS 1p', sans-serif;
+      font-size: 13px; font-weight: 800; color: var(--green-dk);
+    }
+
+    .badge-name span {
+      display: block; font-size: 8px; font-weight: 400;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--green); margin-top: 1px;
+    }
+
+    /* Main title */
+    .hero-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900; line-height: .9;
+      letter-spacing: -0.04em;
+      margin-bottom: 12px;
+    }
+
+    .hero-title .main-en {
+      display: block;
+      font-size: clamp(64px, 11vw, 128px);
+      color: var(--text);
+      /* カーニング調整: M=広い、HH=詰める */
+      font-feature-settings: "kern" 1;
+    }
+
+    /* "の記録" — 日本語サブタイトル */
+    .hero-title .sub-ja {
+      display: block;
+      font-family: 'M PLUS 1p', sans-serif;
+      font-size: clamp(28px, 4.5vw, 54px);
+      font-weight: 800;
+      letter-spacing: .04em;
+      color: var(--green);
+      margin-top: 6px;
+      padding-left: .06em; /* 英字との視覚的整列 */
+    }
+
+    /* 区切り線 */
+    .hero-rule {
+      width: 64px; height: 3px; border-radius: 3px;
+      background: var(--green); margin: 36px 0;
+    }
+
+    .hero-desc {
+      font-size: clamp(13px, 1.6vw, 15px);
+      color: var(--text-2); line-height: 2;
+      max-width: 420px; margin-bottom: 56px;
+    }
+
+    .scroll-cue {
+      display: flex; align-items: center; gap: 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px; font-weight: 700; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--text-3);
+    }
+
+    .scroll-cue::before {
+      content: '';
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, var(--green), transparent);
+      animation: scPulse 2s ease-in-out infinite;
+    }
+    @keyframes scPulse { 0%,100%{opacity:.4} 50%{opacity:1} }
+
+    /* ════════════════════════════════
+       STORY
+       height = (NUM_SCENES × SCENE_VH + 1) × vh  by JS
+    ════════════════════════════════ */
+    #story { position: relative; }
+
+    .story-sticky {
+      position: sticky; top: 0;
+      height: 100vh; overflow: hidden;
+    }
+
+    /* 背景: シーンごとに超薄い色調 */
+    .story-bg {
+      position: absolute; inset: 0;
+      background: var(--white);
+      transition: background 1s ease;
+    }
+
+    /* ── Scene layer ── */
+    .scene-layer {
+      position: absolute; inset: 0;
+      pointer-events: none; overflow: hidden;
+    }
+
+    /* 巨大パララックステキスト */
+    .scene-big-text {
+      position: absolute;
+      left: 6%; bottom: 5%;
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(44px, 7.5vw, 88px);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      will-change: transform;
+      white-space: nowrap;
+    }
+
+    /* Left info — Hataractive POINTカード風 */
+    .scene-info {
+      position: absolute;
+      left: 6%; top: 50%; transform: translateY(-50%);
+      width: 272px;
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0,100,60,.07), 0 1px 3px rgba(0,0,0,.05);
+      padding: 24px 24px 20px;
+      will-change: opacity;
+    }
+
+    /* STEPバッジ（Hataractive風 緑丸） */
+    .si-step {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 14px; flex-shrink: 0;
+    }
+
+    .si-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px; font-weight: 700; letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: 4px 12px; border-radius: 100px;
+      margin-bottom: 14px;
+    }
+
+    .si-title {
+      font-family: 'M PLUS 1p', sans-serif;
+      font-size: clamp(14px, 1.6vw, 17px); font-weight: 800;
+      line-height: 1.6; color: var(--text); margin-bottom: 12px;
+    }
+
+    .si-desc {
+      font-size: 12px; color: var(--text-2);
+      line-height: 2.0; margin-bottom: 18px;
+    }
+
+    .si-list { list-style: none; }
+    .si-list li {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 11.5px; color: var(--text-2);
+      margin-bottom: 8px; line-height: 1.6;
+    }
+
+    .si-check {
+      width: 16px; height: 16px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 8px; margin-top: 1px;
+      font-weight: 700; color: var(--white);
+    }
+
+    /* Right aside — カード */
+    .scene-aside {
+      position: absolute;
+      right: 6%; top: 50%; transform: translateY(-50%);
+      width: 180px;
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0,100,60,.07), 0 1px 3px rgba(0,0,0,.05);
+      padding: 20px;
+      will-change: opacity;
+    }
+
+    .aside-lbl {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 8px; font-weight: 700; letter-spacing: .25em;
+      text-transform: uppercase; color: var(--text-3);
+      margin-bottom: 10px; display: block;
+    }
+
+    .tech-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+
+    .tech-chip {
+      padding: 4px 12px; border-radius: 100px;
+      font-size: 10.5px; font-weight: 700;
+      background: var(--green-lt);
+      color: var(--green-dk);
+      border: 1px solid rgba(0,168,107,.2);
+    }
+
+    /* ── Phone ── */
+    .phone-center {
+      position: absolute; left: 50%; top: 50%;
+      transform: translate(-50%, -50%); z-index: 20;
+    }
+
+    .phone-glow {
+      position: absolute; inset: -60px;
+      border-radius: 50%; filter: blur(60px);
+      opacity: .18; transition: background 1s ease;
+      pointer-events: none;
+    }
+
+    .phone-frame {
+      position: relative; z-index: 1;
+      width: 255px; border-radius: 48px;
+      background: #111120; border: 7px solid #1E1E32;
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,.08),
+        0 32px 72px rgba(0,168,107,.12),
+        0 16px 40px rgba(0,0,0,.18);
+      aspect-ratio: 9/19.5; overflow: hidden;
+    }
+
+    .phone-frame::before {
+      content: ''; position: absolute; top: 9px; left: 50%;
+      transform: translateX(-50%);
+      width: 86px; height: 24px;
+      background: #0a0a16; border-radius: 100px; z-index: 10;
+    }
+
+    .phone-screen { width: 100%; height: 100%; position: relative; overflow: hidden; }
+
+    .phone-slide {
+      position: absolute; inset: 0; opacity: 0;
+      transform: scale(.95) translateY(18px);
+      transition: opacity .5s cubic-bezier(.4,0,.2,1),
+                  transform .5s cubic-bezier(.4,0,.2,1);
+    }
+    .phone-slide.is-active { opacity: 1; transform: scale(1) translateY(0); }
+
+    .slide-body {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      padding: 40px 13px 14px;
+    }
+
+    .slide-sb {
+      display: flex; justify-content: space-between;
+      font-size: 7.5px; color: rgba(255,255,255,.4);
+      margin-bottom: 8px; padding: 0 2px;
+    }
+
+    .slide-hd { font-size: 12px; font-weight: 700; margin-bottom: 8px; }
+
+    .slide-ph {
+      flex: 1; border-radius: 14px;
+      background: rgba(255,255,255,.04);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 10px;
+    }
+
+    .slide-icon {
+      width: 68px; height: 68px; border-radius: 17px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+    }
+
+    .slide-caption {
+      font-size: 9.5px; color: rgba(255,255,255,.28);
+      text-align: center; line-height: 1.6;
+    }
+
+    .slide-footer {
+      height: 64px; border-radius: 12px;
+      background: rgba(255,255,255,.04); margin-top: 7px;
+    }
+
+    /* Dots */
+    .story-dots {
+      position: absolute; right: 24px; top: 50%;
+      transform: translateY(-50%);
+      display: flex; flex-direction: column; gap: 9px; z-index: 30;
+    }
+
+    .s-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--border);
+      transition: background .3s, transform .3s;
+    }
+    .s-dot.is-active { background: var(--green); transform: scale(1.6); }
+
+    /* ════════════════════════════════
+       GROWTH
+    ════════════════════════════════ */
+    #growth {
+      background: var(--white);
+      padding: 140px 10% 120px;
+      border-top: 1px solid var(--border);
+    }
+
+    .growth-inner { max-width: 920px; margin: 0 auto; }
+
+    .sec-eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px; font-weight: 700; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--green);
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .sec-eyebrow::before {
+      content: ''; width: 24px; height: 2px;
+      background: var(--green); border-radius: 2px;
+    }
+
+    .sec-title {
+      font-family: 'M PLUS 1p', sans-serif;
+      font-size: clamp(32px, 5vw, 60px); font-weight: 800;
+      line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 72px;
+      color: var(--text);
+    }
+
+    .sec-title em {
+      font-style: normal; color: var(--green);
+    }
+
+    /* Timeline */
+    .tl { display: grid; grid-template-columns: 1fr 1fr; position: relative; }
+
+    .tl::after {
+      content: ''; position: absolute;
+      top: 6px; bottom: 6px; left: 50%; width: 1px;
+      background: linear-gradient(to bottom,
+        transparent, var(--border) 15%, var(--border) 85%, transparent);
+    }
+
+    .tl-col.tl-l { text-align: right; padding-right: 60px; }
+    .tl-col.tl-r { padding-left: 60px; }
+
+    .tl-entry { margin-bottom: 52px; position: relative; }
+
+    .tl-node {
+      position: absolute; top: 6px;
+      width: 9px; height: 9px; border-radius: 50%;
+    }
+    .tl-l .tl-node { right: -64px; }
+    .tl-r .tl-node { left: -64px; }
+
+    .tl-when {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 8px; font-weight: 700; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--text-3); margin-bottom: 8px;
+    }
+    .tl-what {
+      font-family: 'M PLUS 1p', sans-serif;
+      font-size: 15px; font-weight: 800; margin-bottom: 8px;
+      line-height: 1.5; color: var(--text);
+    }
+    .tl-body { font-size: 12.5px; color: var(--text-2); line-height: 2; }
+
+    .growth-quote {
+      margin-top: 80px; padding: 52px 56px;
+      background: var(--green-lt);
+      border: 1px solid rgba(0,168,107,.18);
+      border-left: 4px solid var(--green);
+      border-radius: 0 20px 20px 0;
+      position: relative;
+    }
+
+    .growth-quote::before {
+      content: '\201C'; position: absolute;
+      top: -12px; left: 40px;
+      font-size: 140px; line-height: 1; font-weight: 900;
+      color: rgba(0,168,107,.08);
+    }
+
+    .quote-text {
+      font-family: 'M PLUS 1p', sans-serif;
+      font-size: clamp(15px, 2vw, 20px); font-weight: 700;
+      line-height: 1.85; color: var(--green-dk);
+      position: relative; z-index: 1;
+    }
+
+    .quote-cite {
+      display: block; margin-top: 18px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px; font-weight: 700; letter-spacing: .2em;
+      color: var(--green); font-style: normal;
+    }
+
+    /* ════════════════════════════════
+       CLOSING  (ダークグリーン + 白文字)
+    ════════════════════════════════ */
+    #closing {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 80px 10%; overflow: hidden;
+      background: var(--dark-end);
+    }
+
+    .closing-pattern {
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(0,168,107,.18) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(0,194,160,.12) 0%, transparent 40%);
+    }
+
+    .closing-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,168,107,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,168,107,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .closing-inner {
+      position: relative; z-index: 1;
+      max-width: 780px; text-align: center;
+    }
+
+    .closing-eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px; font-weight: 700; letter-spacing: .35em;
+      text-transform: uppercase; color: var(--teal);
+      margin-bottom: 28px;
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+    }
+    .closing-eyebrow::before, .closing-eyebrow::after {
+      content: ''; width: 24px; height: 1px; background: var(--teal);
+    }
+
+    .closing-title {
+      font-family: 'M PLUS 1p', sans-serif;
+      font-size: clamp(44px, 8vw, 84px); font-weight: 800;
+      letter-spacing: -0.03em; line-height: .95; margin-bottom: 36px;
+      color: #fff;
+    }
+
+    .closing-title .accent { color: var(--teal); }
+
+    .closing-body {
+      font-size: clamp(13px, 1.6vw, 16px);
+      color: rgba(255,255,255,.55); line-height: 2.1; margin-bottom: 56px;
+    }
+
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 40px; border-radius: 100px;
+      font-family: 'M PLUS 1p', sans-serif;
+      font-size: 14px; font-weight: 800;
+      background: var(--green);
+      color: #fff; text-decoration: none;
+      box-shadow: 0 8px 32px rgba(0,168,107,.4);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 40px rgba(0,168,107,.55);
+    }
+
+    .closing-sig {
+      margin-top: 56px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px; font-weight: 800; letter-spacing: .35em;
+      text-transform: uppercase; color: rgba(255,255,255,.2);
+    }
+
+    /* ════════════════════════════════
+       Reveal utility
+    ════════════════════════════════ */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .75s ease, transform .75s ease;
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* ════════════════════════════════
+       Responsive
+    ════════════════════════════════ */
+    @media (max-width: 860px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      #hero { padding: 100px 6% 60px; align-items: center; text-align: center; }
+      .hero-deco { display: none; }
+      .hero-eyebrow { justify-content: center; }
+      .scroll-cue { display: none; }
+      .scene-big-text { font-size: clamp(28px, 7vw, 48px); white-space: normal; left: 4%; right: 4%; }
+      .scene-info, .scene-aside { display: none; }
+      .phone-frame { width: 200px; }
+      .story-dots { display: none; }
+      .tl { grid-template-columns: 1fr; }
+      .tl::after { display: none; }
+      .tl-col.tl-l, .tl-col.tl-r { text-align: left; padding: 0; }
+      .tl-node { display: none; }
+      .growth-quote { padding: 32px; }
+      #growth { padding: 80px 6% 80px; }
+      .closing-inner { text-align: left; }
+      .closing-eyebrow { justify-content: flex-start; }
+      .closing-eyebrow::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════
+     NAV
+════════════════════════ -->
+<nav>
+  <span class="nav-logo">Haruya <span>Hayashi</span></span>
+  <ul class="nav-links">
+    <li><a href="#story">施策</a></li>
+    <li><a href="#growth">成長</a></li>
+    <li><a href="#closing">これから</a></li>
+  </ul>
+</nav>
+
+
+<!-- ════════════════════════
+     HERO
+════════════════════════ -->
+<section id="hero">
+  <div class="hero-deco"></div>
+
+  <p class="hero-eyebrow">Intern Portfolio &mdash; 2024 / 2025</p>
+
+  <!-- ▼ サービスロゴ・名前は後で差し替え ▼ -->
+  <div class="hero-badge">
+    <div class="badge-logo" id="js-logo">✦</div>
+    <div>
+      <div class="badge-name" id="js-service-name">
+        サービス名
+        <span>Your Service</span>
+      </div>
+    </div>
+  </div>
+
+  <h1 class="hero-title">
+    <span class="main-en">HARUYA<br>HAYASHI</span>
+    <span class="sub-ja">の記録</span>
+  </h1>
+
+  <div class="hero-rule"></div>
+
+  <p class="hero-desc">
+    インターンで担当した施策を<br>スクロールで振り返る。
+  </p>
+
+  <div class="scroll-cue">scroll</div>
+</section>
+
+
+<!-- ════════════════════════
+     STORY
+     JS: height = (4 × 3 + 1) × vh = 1300vh
+════════════════════════ -->
+<div id="story">
+  <div class="story-sticky">
+
+    <div class="story-bg" id="js-bg"></div>
+
+    <!-- ══ Scene 0 ══ -->
+    <div class="scene-layer">
+      <div class="scene-big-text" id="js-big-0">
+        施策タイトルを<br>ここに入力する
+      </div>
+      <div class="scene-info" id="js-info-0">
+        <div class="si-step">01</div>
+        <span class="si-tag" style="background:rgba(0,168,107,.1);color:var(--green-dk)">● 施策 #01</span>
+        <h3 class="si-title">施策タイトルを<br>ここに入力する</h3>
+        <p class="si-desc">この施策でどんな課題を解決したか、どんなアプローチを取ったかを2〜3文で書いてください。</p>
+        <ul class="si-list">
+          <li><span class="si-check" style="background:var(--green)">✓</span>KPI: ◯◯% 改善</li>
+          <li><span class="si-check" style="background:var(--green)">✓</span>XX年 X月〜X月</li>
+          <li><span class="si-check" style="background:var(--green)">✓</span>担当した役割をここに書く</li>
+        </ul>
+      </div>
+      <div class="scene-aside" id="js-aside-0">
+        <span class="aside-lbl">技術スタック</span>
+        <div class="tech-wrap">
+          <span class="tech-chip">Figma</span>
+          <span class="tech-chip">React</span>
+          <span class="tech-chip">TypeScript</span>
+        </div>
+        <span class="aside-lbl">役割</span>
+        <p style="font-size:11.5px;color:var(--text-2);line-height:1.9">担当した役割をここに書く</p>
+      </div>
+    </div>
+
+    <!-- ══ Scene 1 ══ -->
+    <div class="scene-layer">
+      <div class="scene-big-text" id="js-big-1">
+        2つ目の施策タイトルを<br>ここに入力する
+      </div>
+      <div class="scene-info" id="js-info-1">
+        <div class="si-step" style="background:#00C2A0">02</div>
+        <span class="si-tag" style="background:rgba(0,194,160,.1);color:#007A67">● 施策 #02</span>
+        <h3 class="si-title">2つ目の施策タイトルを<br>ここに入力する</h3>
+        <p class="si-desc">この施策でどんな課題を解決したか、どんなアプローチを取ったかを2〜3文で書いてください。</p>
+        <ul class="si-list">
+          <li><span class="si-check" style="background:#00C2A0">✓</span>KPI: ◯◯% 改善</li>
+          <li><span class="si-check" style="background:#00C2A0">✓</span>XX年 X月〜X月</li>
+          <li><span class="si-check" style="background:#00C2A0">✓</span>担当した役割をここに書く</li>
+        </ul>
+      </div>
+      <div class="scene-aside" id="js-aside-1">
+        <span class="aside-lbl">技術スタック</span>
+        <div class="tech-wrap">
+          <span class="tech-chip" style="background:#E6FFF9;color:#007A67;border-color:rgba(0,194,160,.2)">SQL</span>
+          <span class="tech-chip" style="background:#E6FFF9;color:#007A67;border-color:rgba(0,194,160,.2)">Python</span>
+          <span class="tech-chip" style="background:#E6FFF9;color:#007A67;border-color:rgba(0,194,160,.2)">BigQuery</span>
+        </div>
+        <span class="aside-lbl">役割</span>
+        <p style="font-size:11.5px;color:var(--text-2);line-height:1.9">担当した役割をここに書く</p>
+      </div>
+    </div>
+
+    <!-- ══ Scene 2 ══ -->
+    <div class="scene-layer">
+      <div class="scene-big-text" id="js-big-2">
+        3つ目の施策タイトルを<br>ここに入力する
+      </div>
+      <div class="scene-info" id="js-info-2">
+        <div class="si-step" style="background:var(--orange)">03</div>
+        <span class="si-tag" style="background:rgba(244,120,32,.1);color:#B85A10">● 施策 #03</span>
+        <h3 class="si-title">3つ目の施策タイトルを<br>ここに入力する</h3>
+        <p class="si-desc">この施策でどんな課題を解決したか、どんなアプローチを取ったかを2〜3文で書いてください。</p>
+        <ul class="si-list">
+          <li><span class="si-check" style="background:var(--orange)">✓</span>KPI: ◯◯% 改善</li>
+          <li><span class="si-check" style="background:var(--orange)">✓</span>XX年 X月〜X月</li>
+          <li><span class="si-check" style="background:var(--orange)">✓</span>担当した役割をここに書く</li>
+        </ul>
+      </div>
+      <div class="scene-aside" id="js-aside-2">
+        <span class="aside-lbl">技術スタック</span>
+        <div class="tech-wrap">
+          <span class="tech-chip" style="background:#FEF3E8;color:#B85A10;border-color:rgba(244,120,32,.2)">Swift</span>
+          <span class="tech-chip" style="background:#FEF3E8;color:#B85A10;border-color:rgba(244,120,32,.2)">Kotlin</span>
+          <span class="tech-chip" style="background:#FEF3E8;color:#B85A10;border-color:rgba(244,120,32,.2)">Firebase</span>
+        </div>
+        <span class="aside-lbl">役割</span>
+        <p style="font-size:11.5px;color:var(--text-2);line-height:1.9">担当した役割をここに書く</p>
+      </div>
+    </div>
+
+    <!-- ══ Scene 3 ══ -->
+    <div class="scene-layer">
+      <div class="scene-big-text" id="js-big-3">
+        4つ目の施策タイトルを<br>ここに入力する
+      </div>
+      <div class="scene-info" id="js-info-3">
+        <div class="si-step" style="background:var(--purple)">04</div>
+        <span class="si-tag" style="background:rgba(108,92,231,.1);color:#4A3AB0">● 施策 #04</span>
+        <h3 class="si-title">4つ目の施策タイトルを<br>ここに入力する</h3>
+        <p class="si-desc">この施策でどんな課題を解決したか、どんなアプローチを取ったかを2〜3文で書いてください。</p>
+        <ul class="si-list">
+          <li><span class="si-check" style="background:var(--purple)">✓</span>KPI: ◯◯% 改善</li>
+          <li><span class="si-check" style="background:var(--purple)">✓</span>XX年 X月〜X月</li>
+          <li><span class="si-check" style="background:var(--purple)">✓</span>担当した役割をここに書く</li>
+        </ul>
+      </div>
+      <div class="scene-aside" id="js-aside-3">
+        <span class="aside-lbl">技術スタック</span>
+        <div class="tech-wrap">
+          <span class="tech-chip" style="background:#F0EEF9;color:#4A3AB0;border-color:rgba(108,92,231,.2)">Next.js</span>
+          <span class="tech-chip" style="background:#F0EEF9;color:#4A3AB0;border-color:rgba(108,92,231,.2)">Vercel</span>
+          <span class="tech-chip" style="background:#F0EEF9;color:#4A3AB0;border-color:rgba(108,92,231,.2)">Supabase</span>
+        </div>
+        <span class="aside-lbl">役割</span>
+        <p style="font-size:11.5px;color:var(--text-2);line-height:1.9">担当した役割をここに書く</p>
+      </div>
+    </div>
+
+    <!-- ══ Phone ══ -->
+    <div class="phone-center">
+      <div class="phone-glow" id="js-glow"></div>
+      <div class="phone-frame">
+        <div class="phone-screen">
+
+          <!-- Slide 0 -->
+          <div class="phone-slide is-active" id="js-slide-0">
+            <div class="slide-body" style="background:linear-gradient(155deg,#0d1a12,#0a2518)">
+              <div class="slide-sb"><span>9:41</span><span>◉◉ ▪</span></div>
+              <div class="slide-hd" style="color:#00A86B">施策 01</div>
+              <div class="slide-ph">
+                <div class="slide-icon" style="background:linear-gradient(135deg,#00A86B,#00C2A0)">✦</div>
+                <p class="slide-caption">スクリーンショットを<br>ここに配置</p>
+              </div>
+              <div class="slide-footer"></div>
+            </div>
+          </div>
+
+          <!-- Slide 1 -->
+          <div class="phone-slide" id="js-slide-1">
+            <div class="slide-body" style="background:linear-gradient(155deg,#0a1a17,#0c2820)">
+              <div class="slide-sb"><span>9:41</span><span>◉◉ ▪</span></div>
+              <div class="slide-hd" style="color:#00C2A0">施策 02</div>
+              <div class="slide-ph">
+                <div class="slide-icon" style="background:linear-gradient(135deg,#00C2A0,#00A86B)">⬡</div>
+                <p class="slide-caption">スクリーンショットを<br>ここに配置</p>
+              </div>
+              <div class="slide-footer"></div>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="phone-slide" id="js-slide-2">
+            <div class="slide-body" style="background:linear-gradient(155deg,#1a0f08,#28180c)">
+              <div class="slide-sb"><span>9:41</span><span>◉◉ ▪</span></div>
+              <div class="slide-hd" style="color:#F47820">施策 03</div>
+              <div class="slide-ph">
+                <div class="slide-icon" style="background:linear-gradient(135deg,#F47820,#FFD166)">◈</div>
+                <p class="slide-caption">スクリーンショットを<br>ここに配置</p>
+              </div>
+              <div class="slide-footer"></div>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="phone-slide" id="js-slide-3">
+            <div class="slide-body" style="background:linear-gradient(155deg,#10101e,#18163a)">
+              <div class="slide-sb"><span>9:41</span><span>◉◉ ▪</span></div>
+              <div class="slide-hd" style="color:#9B8EF0">施策 04</div>
+              <div class="slide-ph">
+                <div class="slide-icon" style="background:linear-gradient(135deg,#6C5CE7,#9B8EF0)">◇</div>
+                <p class="slide-caption">スクリーンショットを<br>ここに配置</p>
+              </div>
+              <div class="slide-footer"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Dots -->
+    <div class="story-dots">
+      <div class="s-dot is-active" id="js-dot-0"></div>
+      <div class="s-dot"           id="js-dot-1"></div>
+      <div class="s-dot"           id="js-dot-2"></div>
+      <div class="s-dot"           id="js-dot-3"></div>
+    </div>
+
+  </div>
+</div><!-- #story -->
+
+
+<!-- ════════════════════════
+     GROWTH
+════════════════════════ -->
+<section id="growth">
+  <div class="growth-inner">
+
+    <p class="sec-eyebrow reveal">My Journey</p>
+    <h2 class="sec-title reveal">
+      なりたかった像から<br><em>今の自分</em>へ。
+    </h2>
+
+    <div class="tl reveal">
+      <div class="tl-col tl-l">
+
+        <div class="tl-entry">
+          <div class="tl-node" style="background:var(--green)"></div>
+          <p class="tl-when">インターン開始時</p>
+          <h3 class="tl-what">なりたかった像</h3>
+          <p class="tl-body">
+            ここにインターン開始時の目標や理想像を書きます。
+            「◯◯できるようになりたい」「◯◯を身につけたい」
+            などを自由に記入してください。
+          </p>
+        </div>
+
+        <div class="tl-entry">
+          <div class="tl-node" style="background:var(--orange)"></div>
+          <p class="tl-when">インターン中盤</p>
+          <h3 class="tl-what">壁にぶつかったこと</h3>
+          <p class="tl-body">
+            実際に取り組む中で感じたギャップや困難を書きます。
+            具体的なエピソードがあると読み手に伝わりやすいです。
+          </p>
+        </div>
+
+      </div>
+
+      <div class="tl-col tl-r">
+
+        <div class="tl-entry" style="margin-top:52px">
+          <div class="tl-node" style="background:var(--teal)"></div>
+          <p class="tl-when">転換点</p>
+          <h3 class="tl-what">成長のきっかけ</h3>
+          <p class="tl-body">
+            成長のきっかけになった出来事を書きます。
+            チームメンバーとの議論、ユーザーの反応など
+            印象深いエピソードを入れると効果的です。
+          </p>
+        </div>
+
+        <div class="tl-entry">
+          <div class="tl-node" style="background:var(--green-dk)"></div>
+          <p class="tl-when">現在</p>
+          <h3 class="tl-what">今の自分へ</h3>
+          <p class="tl-body">
+            インターンを通じて得たスキル・視点・マインドセットを書きます。
+            最初の「なりたかった像」と対比させると成長が伝わります。
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="growth-quote reveal">
+      <p class="quote-text">
+        インターンを通じて感じたこと、学んだことを一言で。<br>
+        「◯◯は◯◯だと気づいた」「◯◯することの大切さを学んだ」<br>
+        という言葉をここに入れてください。
+      </p>
+      <cite class="quote-cite">— 林 春也</cite>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════
+     CLOSING
+════════════════════════ -->
+<section id="closing">
+  <div class="closing-pattern"></div>
+  <div class="closing-grid"></div>
+
+  <div class="closing-inner">
+    <p class="closing-eyebrow reveal">Thank you</p>
+    <h2 class="closing-title reveal">
+      これからも<br><span class="accent">よろしく</span><br>お願いします。
+    </h2>
+    <p class="closing-body reveal">
+      インターンとして過ごした日々は、私にとってかけがえのない経験でした。<br>
+      正社員として新しいステージでも、同じ熱量で取り組み続けます。<br>
+      引き続きよろしくお願いします。
+    </p>
+    <a href="mailto:your@email.com" class="cta-btn reveal">
+      <span>連絡する</span>
+      <span>→</span>
+    </a>
+    <p class="closing-sig reveal">Haruya Hayashi</p>
+  </div>
+</section>
+
+
+<!-- ════════════════════════
+     JS
+════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+
+  const NUM_SCENES = 4;
+  const SCENE_VH   = 5;   // 各シーン 5vh 分のスクロール
+
+  /* ─ Scene configs ─ */
+  const CFG = [
+    { glow: 'radial-gradient(circle, rgba(0,168,107,.8), transparent)',  bg: '#FFFFFF', bigCol: '#1C2622' },
+    { glow: 'radial-gradient(circle, rgba(0,194,160,.8), transparent)',  bg: '#FAFFFE', bigCol: '#1C2622' },
+    { glow: 'radial-gradient(circle, rgba(244,120,32,.8), transparent)', bg: '#FFFCF9', bigCol: '#1C2622' },
+    { glow: 'radial-gradient(circle, rgba(108,92,231,.8), transparent)', bg: '#FAFAFF', bigCol: '#1C2622' },
+  ];
+
+  /* ─ Elements ─ */
+  const storyEl = document.getElementById('story');
+  const bgEl    = document.getElementById('js-bg');
+  const glowEl  = document.getElementById('js-glow');
+
+  const slides  = Array.from({length: NUM_SCENES}, (_, i) => document.getElementById('js-slide-' + i));
+  const bigs    = Array.from({length: NUM_SCENES}, (_, i) => document.getElementById('js-big-'   + i));
+  const infos   = Array.from({length: NUM_SCENES}, (_, i) => document.getElementById('js-info-'  + i));
+  const asides  = Array.from({length: NUM_SCENES}, (_, i) => document.getElementById('js-aside-' + i));
+  const dots    = Array.from({length: NUM_SCENES}, (_, i) => document.getElementById('js-dot-'   + i));
+
+  /* ─ Story height ─ */
+  function setHeight() {
+    storyEl.style.height = (NUM_SCENES * SCENE_VH + 1) * window.innerHeight + 'px';
+  }
+  setHeight();
+  window.addEventListener('resize', setHeight, { passive: true });
+
+  /* ─ Scroll ─ */
+  function onScroll() {
+    const vh       = window.innerHeight;
+    const storyTop = storyEl.getBoundingClientRect().top + window.scrollY;
+    const scrolled = window.scrollY - storyTop;
+
+    // rawScene: float 0 → NUM_SCENES
+    const rawScene  = Math.max(0, Math.min(NUM_SCENES, scrolled / (vh * SCENE_VH)));
+    const activeIdx = Math.min(NUM_SCENES - 1, Math.floor(rawScene));
+
+    /* Phone slide */
+    slides.forEach((s, i) => s.classList.toggle('is-active', i === activeIdx));
+
+    /* Glow / bg */
+    const c = CFG[activeIdx];
+    glowEl.style.background = c.glow;
+    bgEl.style.background   = c.bg;
+
+    /* Dots */
+    dots.forEach((d, i) => d.classList.toggle('is-active', i === activeIdx));
+
+    /* Per-scene parallax & fades */
+    bigs.forEach((el, i) => {
+      const relProg = rawScene - i;  // 0→1 この場面, <0 未到達, >1 通過済み
+
+      // 大テキスト: +55%vh (下) → -40%vh (上)
+      el.style.transform = `translateY(${(0.5 - relProg) * vh * 0.9}px)`;
+      el.style.color = CFG[i].bigCol;
+
+      // info / aside フェード
+      let op = 0;
+      if (relProg >= 0 && relProg <= 1) {
+        if      (relProg < 0.10) op = relProg / 0.10;
+        else if (relProg > 0.84) op = (1 - relProg) / 0.16;
+        else                     op = 1;
+      }
+      infos [i].style.opacity = op;
+      asides[i].style.opacity = op;
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ─ Reveal ─ */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+}());
+</script>
+
+</body>
+</html>
