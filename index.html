@@ -710,6 +710,16 @@
       flex: 1;
     }
 
+    .offjt-card-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px; font-weight: 700; letter-spacing: .1em;
+      color: var(--orange); text-decoration: none;
+      margin-top: 4px;
+      transition: gap .2s ease;
+    }
+    .offjt-card-link:hover { gap: 10px; }
+
     @media (max-width: 768px) {
       .offjt-grid { grid-template-columns: 1fr; }
       #offjt { padding: 80px 6% 80px; }
@@ -1209,24 +1219,26 @@
 
       <!-- Card 1 -->
       <div class="offjt-card reveal">
-        <div class="offjt-card-icon">📱</div>
-        <span class="offjt-card-tag">Service</span>
-        <h3 class="offjt-card-title">作ったサービス・ツール名をここに</h3>
+        <div class="offjt-card-icon">💻</div>
+        <span class="offjt-card-tag">Learning Portfolio</span>
+        <h3 class="offjt-card-title">デザイナーが<br>コードとAIを用いて</h3>
         <p class="offjt-card-body">
-          どんなサービスを作ったか、どんな課題を解決しようとしたか、
-          使った技術スタックなどを簡潔に書いてください。
+          HAYASHI & AIZAWAの2人でフロントエンド開発を4ヶ月間学習した記録。
+          HTML/CSSからReact・TypeScriptまで、デザイナー視点での習得プロセスをまとめたポートフォリオです。
         </p>
+        <a class="offjt-card-link" href="https://haru1113-cloud.github.io/cs-portfolio1/" target="_blank" rel="noopener">View →</a>
       </div>
 
       <!-- Card 2 -->
       <div class="offjt-card reveal">
-        <div class="offjt-card-icon">🎨</div>
-        <span class="offjt-card-tag">Design</span>
-        <h3 class="offjt-card-title">作ったサービス・ツール名をここに</h3>
+        <div class="offjt-card-icon">🍽️</div>
+        <span class="offjt-card-tag">Service</span>
+        <h3 class="offjt-card-title">メシリスト</h3>
         <p class="offjt-card-body">
-          どんなサービスを作ったか、どんな課題を解決しようとしたか、
-          使った技術スタックなどを簡潔に書いてください。
+          食材を入力するだけで1週間分の献立と買い物リストをAIが自動生成するサービス。
+          毎日の献立に悩む忙しい家族の課題を解決します。
         </p>
+        <a class="offjt-card-link" href="https://www.meshilist.com/" target="_blank" rel="noopener">View →</a>
       </div>
 
       <!-- Card 3 -->
