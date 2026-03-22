@@ -675,13 +675,24 @@
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: 20px;
-      padding: 32px 28px;
-      display: flex; flex-direction: column; gap: 16px;
+      overflow: hidden;
+      display: flex; flex-direction: column;
       transition: transform .25s ease, box-shadow .25s ease;
     }
     .offjt-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 12px 40px rgba(0,0,0,.08);
+    }
+
+    .offjt-card-img {
+      width: 100%; aspect-ratio: 16/9;
+      object-fit: cover; object-position: center top;
+      display: block;
+    }
+
+    .offjt-card-body-wrap {
+      padding: 24px 24px 28px;
+      display: flex; flex-direction: column; gap: 12px; flex: 1;
     }
 
     .offjt-card-icon {
@@ -1217,30 +1228,32 @@
 
       <!-- Card 1 -->
       <div class="offjt-card reveal">
-        <div class="offjt-card-icon">💻</div>
-        <span class="offjt-card-tag">Learning Portfolio</span>
-        <h3 class="offjt-card-title">デザイナーが<br>コードとAIを用いて</h3>
-        <p class="offjt-card-body">
-          HAYASHI & AIZAWAの2人でフロントエンド開発を4ヶ月間学習した記録。
-          HTML/CSSからReact・TypeScriptまで、デザイナー視点での習得プロセスをまとめたポートフォリオです。
-        </p>
-        <a class="offjt-card-link" href="https://haru1113-cloud.github.io/cs-portfolio1/" target="_blank" rel="noopener">View →</a>
+        <img class="offjt-card-img" src="offjt-card1.png" alt="デザイナーがコードとAIを用いて">
+        <div class="offjt-card-body-wrap">
+          <span class="offjt-card-tag">Learning Portfolio</span>
+          <h3 class="offjt-card-title">デザイナーが<br>コードとAIを用いて</h3>
+          <p class="offjt-card-body">
+            OFFJTで作成。HAYASHI & AIZAWAの2人でHTML/CSSからReact・TypeScriptまでを4ヶ月かけて習得した学習ポートフォリオ。デザイナー視点でのフロントエンド開発の記録です。
+          </p>
+          <a class="offjt-card-link" href="https://haru1113-cloud.github.io/cs-portfolio1/" target="_blank" rel="noopener">View →</a>
+        </div>
       </div>
 
       <!-- Card 2 -->
       <div class="offjt-card reveal">
-        <div class="offjt-card-icon">🍽️</div>
-        <span class="offjt-card-tag">Service</span>
-        <h3 class="offjt-card-title">メシリスト</h3>
-        <p class="offjt-card-body">
-          食材を入力するだけで1週間分の献立と買い物リストをAIが自動生成するサービス。
-          毎日の献立に悩む忙しい家族の課題を解決します。
-        </p>
-        <a class="offjt-card-link" href="https://www.meshilist.com/" target="_blank" rel="noopener">View →</a>
+        <img class="offjt-card-img" src="offjt-card2.png" alt="メシリスト">
+        <div class="offjt-card-body-wrap">
+          <span class="offjt-card-tag">Service</span>
+          <h3 class="offjt-card-title">メシリスト</h3>
+          <p class="offjt-card-body">
+            OFFJTで開発したAI献立生成サービス。食材を入力するだけで今日の献立からレシピ・買い物リストまでAIが自動生成。毎日の「何食べる？」をなくします。
+          </p>
+          <a class="offjt-card-link" href="https://www.meshilist.com/" target="_blank" rel="noopener">View →</a>
+        </div>
       </div>
 
       <!-- Card 3 -->
-      <div class="offjt-card reveal">
+      <div class="offjt-card reveal" style="padding:32px 28px;">
         <div class="offjt-card-icon">⚙️</div>
         <span class="offjt-card-tag">Tool</span>
         <h3 class="offjt-card-title">作ったサービス・ツール名をここに</h3>
