@@ -292,6 +292,7 @@
       padding: 14px;
       will-change: opacity;
       z-index: 10;
+      pointer-events: auto;
     }
     .compare-card-tabs {
       display: flex; gap: 6px; margin-bottom: 10px;
@@ -1055,7 +1056,7 @@
       </div>
 
       <!-- 比較カード -->
-      <div class="compare-card" id="js-compare-1">
+      <div class="compare-card" id="js-compare-1" style="opacity:0;pointer-events:none;">
         <div class="compare-card-tabs">
           <button class="compare-tab is-active" onclick="switchCompare(0)">初期アウトプット</button>
           <button class="compare-tab" onclick="switchCompare(1)">最終アウトプット</button>
@@ -1431,7 +1432,8 @@
   const infos   = Array.from({length: NUM_SCENES}, (_, i) => document.getElementById('js-info-'  + i));
   const asides  = Array.from({length: NUM_SCENES}, (_, i) => document.getElementById('js-aside-' + i));
   const dots    = Array.from({length: NUM_SCENES}, (_, i) => document.getElementById('js-dot-'   + i));
-  const decos   = [document.getElementById('js-deco-0'), document.getElementById('js-deco-1'), document.getElementById('js-deco-2'), null];
+  const decos      = [document.getElementById('js-deco-0'), document.getElementById('js-deco-1'), document.getElementById('js-deco-2'), null];
+  const compareCard1 = document.getElementById('js-compare-1');
 
   /* ─ Story height ─ */
   function setHeight() {
@@ -1493,6 +1495,7 @@
       }
       infos [i].style.opacity = op;
       asides[i].style.opacity = op;
+      if (i === 1) { compareCard1.style.opacity = op; compareCard1.style.pointerEvents = op > 0.5 ? 'auto' : 'none'; }
 
       // deco (右上画像など) — big テキストと同じ parallax + フェード
       if (decos[i]) {
