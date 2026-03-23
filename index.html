@@ -561,6 +561,7 @@
     .tl::after {
       content: ''; position: absolute;
       top: 6px; bottom: 6px; left: 50%; width: 1px;
+      transform: translateX(-50%);
       background: linear-gradient(to bottom,
         transparent, var(--border) 15%, var(--border) 85%, transparent);
     }
@@ -573,9 +574,10 @@
     .tl-node {
       position: absolute; top: 6px;
       width: 9px; height: 9px; border-radius: 50%;
+      z-index: 1;
     }
-    .tl-l .tl-node { right: -64px; }
-    .tl-r .tl-node { left: -64px; }
+    .tl-l .tl-node { right: calc(-60px - 4.5px); }
+    .tl-r .tl-node { left: calc(-60px - 4.5px); }
 
     .tl-when {
       font-family: 'Montserrat', sans-serif;
@@ -878,6 +880,74 @@
 
 
 <!-- ════════════════════════
+     GROWTH
+════════════════════════ -->
+<section id="growth">
+  <div class="growth-inner">
+
+    <p class="sec-eyebrow reveal">My Journey</p>
+    <h2 class="sec-title reveal">
+      テキスト<br><em>テキスト</em>テキスト
+    </h2>
+
+    <div class="tl reveal">
+      <div class="tl-col tl-l">
+
+        <div class="tl-entry">
+          <div class="tl-node" style="background:var(--green)"></div>
+          <p class="tl-when">テキスト</p>
+          <h3 class="tl-what">テキスト</h3>
+          <p class="tl-body">
+            テキスト
+          </p>
+        </div>
+
+        <div class="tl-entry">
+          <div class="tl-node" style="background:var(--orange)"></div>
+          <p class="tl-when">テキスト</p>
+          <h3 class="tl-what">テキスト</h3>
+          <p class="tl-body">
+            テキスト
+          </p>
+        </div>
+
+      </div>
+
+      <div class="tl-col tl-r">
+
+        <div class="tl-entry" style="margin-top:52px">
+          <div class="tl-node" style="background:var(--teal)"></div>
+          <p class="tl-when">テキスト</p>
+          <h3 class="tl-what">テキスト</h3>
+          <p class="tl-body">
+            テキスト
+          </p>
+        </div>
+
+        <div class="tl-entry">
+          <div class="tl-node" style="background:var(--green-dk)"></div>
+          <p class="tl-when">テキスト</p>
+          <h3 class="tl-what">テキスト</h3>
+          <p class="tl-body">
+            テキスト
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="growth-quote reveal">
+      <p class="quote-text">
+        テキスト
+      </p>
+      <cite class="quote-cite">— 林 春也</cite>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════
      STORY
      JS: height = (4 × 3 + 1) × vh = 1300vh
 ════════════════════════ -->
@@ -1157,72 +1227,6 @@
 </div><!-- #story -->
 
 
-<!-- ════════════════════════
-     GROWTH
-════════════════════════ -->
-<section id="growth">
-  <div class="growth-inner">
-
-    <p class="sec-eyebrow reveal">My Journey</p>
-    <h2 class="sec-title reveal">
-      テキスト<br><em>テキスト</em>テキスト
-    </h2>
-
-    <div class="tl reveal">
-      <div class="tl-col tl-l">
-
-        <div class="tl-entry">
-          <div class="tl-node" style="background:var(--green)"></div>
-          <p class="tl-when">テキスト</p>
-          <h3 class="tl-what">テキスト</h3>
-          <p class="tl-body">
-            テキスト
-          </p>
-        </div>
-
-        <div class="tl-entry">
-          <div class="tl-node" style="background:var(--orange)"></div>
-          <p class="tl-when">テキスト</p>
-          <h3 class="tl-what">テキスト</h3>
-          <p class="tl-body">
-            テキスト
-          </p>
-        </div>
-
-      </div>
-
-      <div class="tl-col tl-r">
-
-        <div class="tl-entry" style="margin-top:52px">
-          <div class="tl-node" style="background:var(--teal)"></div>
-          <p class="tl-when">テキスト</p>
-          <h3 class="tl-what">テキスト</h3>
-          <p class="tl-body">
-            テキスト
-          </p>
-        </div>
-
-        <div class="tl-entry">
-          <div class="tl-node" style="background:var(--green-dk)"></div>
-          <p class="tl-when">テキスト</p>
-          <h3 class="tl-what">テキスト</h3>
-          <p class="tl-body">
-            テキスト
-          </p>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="growth-quote reveal">
-      <p class="quote-text">
-        テキスト
-      </p>
-      <cite class="quote-cite">— 林 春也</cite>
-    </div>
-
-  </div>
-</section>
 
 
 <!-- ════════════════════════
