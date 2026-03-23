@@ -280,6 +280,46 @@
       font-weight: 700; color: var(--white);
     }
 
+    /* Compare card (施策02 bottom-right) */
+    .compare-card {
+      position: absolute;
+      right: 6%; bottom: 5%;
+      width: 260px;
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 24px rgba(0,100,60,.10), 0 1px 4px rgba(0,0,0,.06);
+      padding: 14px;
+      will-change: opacity;
+      z-index: 10;
+    }
+    .compare-card-tabs {
+      display: flex; gap: 6px; margin-bottom: 10px;
+    }
+    .compare-tab {
+      flex: 1; padding: 5px 0; border: none; border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px; font-weight: 700; letter-spacing: .1em;
+      cursor: pointer; transition: background .2s, color .2s;
+      background: var(--surface); color: var(--text-3);
+    }
+    .compare-tab.is-active {
+      background: var(--green); color: #fff;
+    }
+    .compare-img-wrap { position: relative; border-radius: 10px; overflow: hidden; }
+    .compare-img-wrap img {
+      width: 100%; display: block; border-radius: 10px;
+      position: absolute; top: 0; left: 0;
+      opacity: 0; transition: opacity .3s;
+    }
+    .compare-img-wrap img.is-active { opacity: 1; position: relative; }
+    .compare-lbl {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 7.5px; font-weight: 700; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--text-3);
+      text-align: center; margin-top: 8px;
+    }
+
     /* Right aside — カード */
     .scene-aside {
       position: absolute;
@@ -1013,6 +1053,19 @@
           <span class="tech-chip" style="background:#E6FFF9;color:#007A67;border-color:rgba(0,194,160,.2)">FBのもらい方</span>
         </div>
       </div>
+
+      <!-- 比較カード -->
+      <div class="compare-card" id="js-compare-1">
+        <div class="compare-card-tabs">
+          <button class="compare-tab is-active" onclick="switchCompare(0)">初期アウトプット</button>
+          <button class="compare-tab" onclick="switchCompare(1)">最終アウトプット</button>
+        </div>
+        <div class="compare-img-wrap">
+          <img src="image5.png" alt="初期アウトプット" class="is-active" id="js-cmp-0">
+          <img src="image6.png" alt="最終アウトプット" id="js-cmp-1">
+        </div>
+        <p class="compare-lbl" id="js-cmp-lbl">BEFORE</p>
+      </div>
     </div>
 
     <!-- ══ Scene 2 ══ -->
@@ -1332,6 +1385,18 @@
     var fn = _sceneToggles[window._activeScene];
     if (fn) fn();
   }
+
+  /* 比較カード切り替え */
+  window._cmpIdx = 0;
+  window.switchCompare = function(idx) {
+    window._cmpIdx = idx;
+    var imgs = [document.getElementById('js-cmp-0'), document.getElementById('js-cmp-1')];
+    var tabs = document.querySelectorAll('.compare-tab');
+    var lbl  = document.getElementById('js-cmp-lbl');
+    imgs.forEach(function(el, i) { el.classList.toggle('is-active', i === idx); });
+    tabs.forEach(function(el, i) { el.classList.toggle('is-active', i === idx); });
+    lbl.textContent = idx === 0 ? 'BEFORE' : 'AFTER';
+  };
 </script>
 
 <script>
