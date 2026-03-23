@@ -1058,20 +1058,18 @@
     <!-- ══ Dual Phones (Scene 0 only) ══ -->
     <div class="dual-phone-center" id="js-dual-phones">
 
-      <!-- Phone A (left) -->
+      <!-- Phone A (left) — BEFORE 固定 -->
       <div class="phone-pair-item">
         <div class="phone-ba-label">
-          <span class="lbl-tag lbl-before is-visible" id="js-lbl-A-before">BEFORE</span>
-          <span class="lbl-tag lbl-after"             id="js-lbl-A-after">AFTER</span>
+          <span class="lbl-tag lbl-before is-visible">BEFORE</span>
         </div>
-        <div class="iphone17" onclick="togglePhoneA()">
+        <div class="iphone17" style="pointer-events:none;">
           <div class="iphone17-frame-ring">
             <div class="iphone17-bezel">
               <div class="phone-frame">
                 <div class="phone-screen">
                   <div class="slide-screen-toggle">
-                    <img class="screen-img is-active" id="js-imgA-1" src="STEP2.png" alt="Before">
-                    <img class="screen-img"           id="js-imgA-2" src="STEP6.png" alt="After">
+                    <img class="screen-img is-active" src="STEP3.png" alt="Before">
                   </div>
                 </div>
               </div>
@@ -1080,20 +1078,18 @@
         </div>
       </div>
 
-      <!-- Phone B (right) -->
+      <!-- Phone B (right) — AFTER 固定 -->
       <div class="phone-pair-item">
         <div class="phone-ba-label">
-          <span class="lbl-tag lbl-before is-visible" id="js-lbl-B-before">BEFORE</span>
-          <span class="lbl-tag lbl-after"             id="js-lbl-B-after">AFTER</span>
+          <span class="lbl-tag lbl-after is-visible">AFTER</span>
         </div>
-        <div class="iphone17" onclick="togglePhoneB()">
+        <div class="iphone17" style="pointer-events:none;">
           <div class="iphone17-frame-ring">
             <div class="iphone17-bezel">
               <div class="phone-frame">
                 <div class="phone-screen">
                   <div class="slide-screen-toggle">
-                    <img class="screen-img is-active" id="js-imgB-1" src="STEP3.png" alt="Before">
-                    <img class="screen-img"           id="js-imgB-2" src="STEP4.png" alt="After">
+                    <img class="screen-img is-active" src="STEP4.png" alt="After">
                   </div>
                 </div>
               </div>
