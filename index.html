@@ -1055,7 +1055,52 @@
       </div><!-- /iphone17 -->
     </div><!-- /phone-center -->
 
-    <!-- ══ Dual Phones (Scene 0 only) ══ -->
+    <!-- ══ Dual Phones (Scene 1) ══ -->
+    <div class="dual-phone-center" id="js-dual-phones-1">
+
+      <!-- Phone A (left) — BEFORE 固定 -->
+      <div class="phone-pair-item">
+        <div class="phone-ba-label">
+          <span class="lbl-tag lbl-before is-visible">BEFORE</span>
+        </div>
+        <div class="iphone17" style="pointer-events:none;">
+          <div class="iphone17-frame-ring">
+            <div class="iphone17-bezel">
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <div class="slide-screen-toggle" style="background:#f2f2f2;">
+                    <img class="screen-img is-active" src="s2-before.png" alt="Before" style="object-fit:contain;object-position:center top;">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phone B (right) — AFTER 固定 -->
+      <div class="phone-pair-item">
+        <div class="phone-ba-label">
+          <span class="lbl-tag lbl-after is-visible">AFTER</span>
+        </div>
+        <div class="iphone17" style="pointer-events:none;">
+          <div class="iphone17-frame-ring">
+            <div class="iphone17-bezel">
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <div class="slide-screen-toggle" style="background:#f2f2f2;">
+                    <img class="screen-img is-active" src="s2-after.png" alt="After" style="object-fit:contain;object-position:center top;">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /dual-phone-center scene 1 -->
+
+    <!-- ══ Dual Phones (Scene 0) ══ -->
     <div class="dual-phone-center" id="js-dual-phones">
 
       <!-- Phone A (left) — BEFORE 固定 -->
@@ -1306,6 +1351,7 @@
   const glowEl       = document.getElementById('js-glow');
   const phoneCenterEl = document.getElementById('js-phone-center');
   const dualPhonesEl  = document.getElementById('js-dual-phones');
+  const dualPhones1El = document.getElementById('js-dual-phones-1');
 
   const slides  = Array.from({length: NUM_SCENES}, (_, i) => document.getElementById('js-slide-' + i));
   const bigs    = Array.from({length: NUM_SCENES}, (_, i) => document.getElementById('js-big-'   + i));
@@ -1342,10 +1388,12 @@
     /* Dots */
     dots.forEach((d, i) => d.classList.toggle('is-active', i === activeIdx));
 
-    /* Dual phones: visible only for scene 0 */
-    const showDual = activeIdx === 0;
-    dualPhonesEl.classList.toggle('is-visible', showDual);
-    phoneCenterEl.style.display = showDual ? 'none' : '';
+    /* Dual phones: scene 0 and scene 1 */
+    const showDual0 = activeIdx === 0;
+    const showDual1 = activeIdx === 1;
+    dualPhonesEl.classList.toggle('is-visible', showDual0);
+    dualPhones1El.classList.toggle('is-visible', showDual1);
+    phoneCenterEl.style.display = (showDual0 || showDual1) ? 'none' : '';
 
     /* Track active scene for click handler */
     window._activeScene = activeIdx;
