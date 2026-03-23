@@ -632,13 +632,11 @@
     }
     .tl-body { font-size: 12.5px; color: var(--text-2); line-height: 2; }
 
-    .journey-cards {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 52px;
+    .journey-items {
+      display: flex; flex-direction: column; gap: 40px; margin-top: 52px;
     }
-    .journey-card {
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: 16px; padding: 32px 28px;
-      box-shadow: 0 4px 20px rgba(0,100,60,.06);
+    .journey-item {
+      display: flex; flex-direction: column; gap: 12px;
     }
     .journey-card-label {
       font-family: 'Montserrat', sans-serif;
@@ -949,12 +947,12 @@
       インターン当初の目標と<br><em>現状</em>
     </h2>
 
-    <div class="journey-cards reveal">
-      <div class="journey-card">
+    <div class="journey-items reveal">
+      <div class="journey-item">
         <span class="journey-card-label" style="color:var(--green);border-color:var(--green)">目標</span>
         <p class="journey-card-body">4月から会社にくるのがワクワクする状態を作る</p>
       </div>
-      <div class="journey-card">
+      <div class="journey-item">
         <span class="journey-card-label" style="color:var(--orange);border-color:var(--orange)">現状</span>
         <p class="journey-card-body">新しいことをまだまだ学ぶことができるというワクワク感、以前の自分よりも成長できているという実感は湧いているものの、業務を自分一人でこなすこと（自走する）というところまで届いていないという不安もあるという状況</p>
       </div>
