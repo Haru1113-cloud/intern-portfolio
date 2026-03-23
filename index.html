@@ -1105,7 +1105,10 @@
     <!-- ══ Scene 3 ══ -->
     <div class="scene-layer">
       <div class="scene-big-text" id="js-big-3">
-        【HT】カードのデザイン統廃合と<br>サムネイルテンプレート改修
+        <img src="s4-bg-bl.png" alt="" style="max-height:70vh;max-width:55vw;object-fit:contain;opacity:.4;display:block;">
+      </div>
+      <div id="js-deco-3" style="position:absolute;right:6%;top:5%;will-change:transform,opacity;opacity:0;pointer-events:none;">
+        <img src="s4-bg-tr.png" alt="" style="max-height:38vh;max-width:28vw;object-fit:contain;opacity:.4;display:block;">
       </div>
       <div class="scene-info" id="js-info-3">
         <div class="si-step" style="background:var(--purple)">04</div>
@@ -1431,7 +1434,7 @@
   const infos   = Array.from({length: NUM_SCENES}, (_, i) => document.getElementById('js-info-'  + i));
   const asides  = Array.from({length: NUM_SCENES}, (_, i) => document.getElementById('js-aside-' + i));
   const dots    = Array.from({length: NUM_SCENES}, (_, i) => document.getElementById('js-dot-'   + i));
-  const decos      = [document.getElementById('js-deco-0'), document.getElementById('js-deco-1'), document.getElementById('js-deco-2'), null];
+  const decos      = [document.getElementById('js-deco-0'), document.getElementById('js-deco-1'), document.getElementById('js-deco-2'), document.getElementById('js-deco-3')];
   const compareCard1 = document.getElementById('js-compare-1');
 
   /* ─ Story height ─ */
