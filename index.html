@@ -1230,6 +1230,11 @@
 
     </div><!-- /dual-phone-center scene 1 -->
 
+    <!-- ══ Scene 3 image ══ -->
+    <div id="js-scene3-img" style="display:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:20;max-width:52vw;max-height:80vh;">
+      <img src="s4-screen.png" alt="施策04" style="max-width:100%;max-height:80vh;object-fit:contain;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.18);">
+    </div>
+
     <!-- ══ Dual Phones (Scene 0) ══ -->
     <div class="dual-phone-center" id="js-dual-phones">
 
@@ -1428,6 +1433,7 @@
   const phoneCenterEl = document.getElementById('js-phone-center');
   const dualPhonesEl  = document.getElementById('js-dual-phones');
   const dualPhones1El = document.getElementById('js-dual-phones-1');
+  const scene3ImgEl   = document.getElementById('js-scene3-img');
 
   const slides  = Array.from({length: NUM_SCENES}, (_, i) => document.getElementById('js-slide-' + i));
   const bigs    = Array.from({length: NUM_SCENES}, (_, i) => document.getElementById('js-big-'   + i));
@@ -1465,12 +1471,14 @@
     /* Dots */
     dots.forEach((d, i) => d.classList.toggle('is-active', i === activeIdx));
 
-    /* Dual phones: scene 0 and scene 1 */
-    const showDual0 = activeIdx === 0;
-    const showDual1 = activeIdx === 1;
+    /* Dual phones: scene 0 and scene 1 / image: scene 3 */
+    const showDual0  = activeIdx === 0;
+    const showDual1  = activeIdx === 1;
+    const showScene3 = activeIdx === 3;
     dualPhonesEl.classList.toggle('is-visible', showDual0);
     dualPhones1El.classList.toggle('is-visible', showDual1);
-    phoneCenterEl.style.display = (showDual0 || showDual1) ? 'none' : '';
+    scene3ImgEl.style.display   = showScene3 ? 'block' : 'none';
+    phoneCenterEl.style.display = (showDual0 || showDual1 || showScene3) ? 'none' : '';
 
     /* Track active scene for click handler */
     window._activeScene = activeIdx;
