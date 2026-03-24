@@ -222,17 +222,27 @@
       white-space: nowrap;
     }
 
-    /* Left info — Hataractive POINTカード風 */
+    /* Left panel — 施策サイドパネル */
     .scene-info {
       position: absolute;
-      left: 6%; top: 50%; transform: translateY(-50%);
-      width: 272px;
+      left: 0; top: 0; bottom: 0;
+      width: 320px;
       background: var(--white);
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 20px rgba(0,100,60,.07), 0 1px 3px rgba(0,0,0,.05);
-      padding: 24px 24px 20px;
+      border-right: 1px solid var(--border);
+      box-shadow: 4px 0 24px rgba(0,100,60,.07);
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       will-change: opacity;
+      overflow-y: auto;
+    }
+
+    .panel-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0 16px;
     }
 
     /* STEPバッジ（Hataractive風 緑丸） */
@@ -321,18 +331,8 @@
       text-align: center; margin-top: 8px;
     }
 
-    /* Right aside — カード */
-    .scene-aside {
-      position: absolute;
-      right: 6%; top: 50%; transform: translateY(-50%);
-      width: 180px;
-      background: var(--white);
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 20px rgba(0,100,60,.07), 0 1px 3px rgba(0,0,0,.05);
-      padding: 20px;
-      will-change: opacity;
-    }
+    /* scene-aside は廃止 (コンテンツは scene-info 内に統合) */
+    .scene-aside { display: none; }
 
     .aside-lbl {
       font-family: 'Montserrat', sans-serif;
@@ -341,7 +341,7 @@
       margin-bottom: 10px; display: block;
     }
 
-    .tech-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+    .tech-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 0; }
 
     .tech-chip {
       padding: 4px 12px; border-radius: 100px;
@@ -1156,8 +1156,7 @@
           <li><span class="si-check" style="background:var(--green)">✓</span>ユーザー理解</li>
           <li><span class="si-check" style="background:var(--green)">✓</span>コピー修正</li>
         </ul>
-      </div>
-      <div class="scene-aside" id="js-aside-0">
+        <div class="panel-divider"></div>
         <span class="aside-lbl">学んだこと</span>
         <div class="tech-wrap">
           <span class="tech-chip">日本語の開き方</span>
@@ -1166,6 +1165,7 @@
           <span class="tech-chip">タスク分解</span>
         </div>
       </div>
+      <div class="scene-aside" id="js-aside-0"></div>
     </div>
 
     <!-- ══ Scene 1 ══ -->
@@ -1189,8 +1189,7 @@
           <li><span class="si-check" style="background:#00C2A0">✓</span>A/Bテスト設計</li>
           <li><span class="si-check" style="background:#00C2A0">✓</span>効果測定</li>
         </ul>
-      </div>
-      <div class="scene-aside" id="js-aside-1">
+        <div class="panel-divider"></div>
         <span class="aside-lbl">学んだこと</span>
         <div class="tech-wrap">
           <span class="tech-chip" style="background:#E6FFF9;color:#007A67;border-color:rgba(0,194,160,.2)">リファの集め方</span>
@@ -1198,6 +1197,7 @@
           <span class="tech-chip" style="background:#E6FFF9;color:#007A67;border-color:rgba(0,194,160,.2)">FBのもらい方</span>
         </div>
       </div>
+      <div class="scene-aside" id="js-aside-1"></div>
 
       <!-- 比較カード -->
       <div class="compare-card" id="js-compare-1" style="opacity:0;pointer-events:none;">
@@ -1232,8 +1232,7 @@
           <li><span class="si-check" style="background:var(--orange)">✓</span>コピーライティング</li>
           <li><span class="si-check" style="background:var(--orange)">✓</span>UI/UXデザイン</li>
         </ul>
-      </div>
-      <div class="scene-aside" id="js-aside-2">
+        <div class="panel-divider"></div>
         <span class="aside-lbl">学んだこと</span>
         <div class="tech-wrap">
           <span class="tech-chip" style="background:#FFF3EA;color:#B85A10;border-color:rgba(244,120,32,.2)">インフォグラフィックス</span>
@@ -1241,6 +1240,7 @@
           <span class="tech-chip" style="background:#FFF3EA;color:#B85A10;border-color:rgba(244,120,32,.2)">鳥の目虫の目</span>
         </div>
       </div>
+      <div class="scene-aside" id="js-aside-2"></div>
     </div>
 
     <!-- ══ Scene 3 ══ -->
@@ -1260,8 +1260,7 @@
           <li><span class="si-check" style="background:var(--purple)">✓</span>コンポーネント設計</li>
           <li><span class="si-check" style="background:var(--purple)">✓</span>ページごとの体験設計改修</li>
         </ul>
-      </div>
-      <div class="scene-aside" id="js-aside-3">
+        <div class="panel-divider"></div>
         <span class="aside-lbl">学んだこと</span>
         <div class="tech-wrap">
           <span class="tech-chip" style="background:#F0EEF9;color:#4A3AB0;border-color:rgba(108,92,231,.2)">開発・マーケティングとの連携</span>
@@ -1270,6 +1269,7 @@
           <span class="tech-chip" style="background:#F0EEF9;color:#4A3AB0;border-color:rgba(108,92,231,.2)">体験設計</span>
         </div>
       </div>
+      <div class="scene-aside" id="js-aside-3"></div>
     </div>
 
     <!-- ══ Phone (iPhone 13) ══ -->
