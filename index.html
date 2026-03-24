@@ -928,6 +928,106 @@
     }
 
     /* ════════════════════════════════
+       MODAL
+    ════════════════════════════════ */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,.6);
+      align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.is-open { display: flex; }
+
+    .modal-box {
+      background: var(--white); border-radius: 20px;
+      width: 100%; max-width: 760px; max-height: 88vh;
+      overflow: hidden; display: flex; flex-direction: column;
+      box-shadow: 0 32px 80px rgba(0,0,0,.3);
+      position: relative;
+    }
+
+    .modal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 28px; border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .modal-header-title {
+      font-family: 'M PLUS 1p', sans-serif;
+      font-size: 15px; font-weight: 800; color: var(--text);
+    }
+    .modal-close {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: none; cursor: pointer; background: #eee;
+      font-size: 16px; display: flex; align-items: center; justify-content: center;
+      transition: background .2s; flex-shrink: 0;
+    }
+    .modal-close:hover { background: #ddd; }
+
+    .modal-body {
+      overflow-y: auto; flex: 1;
+    }
+
+    .modal-iframe {
+      width: 100%; height: 100%; min-height: 70vh;
+      border: none; display: block;
+    }
+
+    .modal-doc {
+      padding: 36px 40px 48px;
+    }
+    .modal-doc-intro {
+      background: #F8F8F6; border-radius: 12px;
+      padding: 20px 24px; margin-bottom: 32px;
+    }
+    .modal-doc-intro p {
+      font-size: 12px; color: var(--text-2); line-height: 1.9; margin: 0;
+    }
+    .modal-meeting {
+      border-top: 1px solid var(--border);
+      padding-top: 28px; margin-top: 28px;
+    }
+    .modal-meeting-date {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px; font-weight: 700; letter-spacing: .25em;
+      color: var(--green); text-transform: uppercase; margin-bottom: 20px;
+    }
+    .modal-person {
+      margin-bottom: 20px;
+    }
+    .modal-person-name {
+      font-family: 'M PLUS 1p', sans-serif;
+      font-size: 12px; font-weight: 800; color: var(--text);
+      margin-bottom: 8px;
+    }
+    .modal-person ul {
+      padding-left: 18px; margin: 0 0 8px;
+    }
+    .modal-person ul li {
+      font-size: 12px; color: var(--text-2); line-height: 1.85; margin-bottom: 2px;
+    }
+    .modal-person ul ul { margin-top: 2px; }
+    .modal-person-section {
+      font-size: 11px; font-weight: 700; color: var(--text);
+      margin: 10px 0 4px; text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif; letter-spacing: .1em;
+    }
+
+    .offjt-card-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px; font-weight: 700; letter-spacing: .1em;
+      color: var(--text); text-decoration: none;
+      transition: gap .2s ease;
+      background: none; border: none; cursor: pointer; padding: 0;
+    }
+    .offjt-card-btn:hover { gap: 10px; }
+
+    @media (max-width: 768px) {
+      .modal-box { max-height: 92vh; }
+      .modal-doc { padding: 24px 20px 40px; }
+    }
+
+    /* ════════════════════════════════
        Reveal utility
     ════════════════════════════════ */
     .reveal {
@@ -1356,7 +1456,7 @@
           <p class="offjt-card-body">
             OFFJTで作成。HAYASHI & AIZAWAの2人でHTML/CSSからReact・TypeScriptまでを4ヶ月かけて習得した学習ポートフォリオ。デザイナー視点でのフロントエンド開発の記録です。
           </p>
-          <a class="offjt-card-link" href="https://haru1113-cloud.github.io/cs-portfolio1/" target="_blank" rel="noopener">View →</a>
+          <button class="offjt-card-btn" onclick="openModal('modal-card1')">View →</button>
         </div>
       </div>
 
@@ -1369,7 +1469,7 @@
           <p class="offjt-card-body">
             OFFJTで開発したAI献立生成サービス。食材を入力するだけで今日の献立からレシピ・買い物リストまでAIが自動生成。毎日の「何食べる？」をなくします。
           </p>
-          <a class="offjt-card-link" href="https://www.meshilist.com/" target="_blank" rel="noopener">View →</a>
+          <button class="offjt-card-btn" onclick="openModal('modal-card2')">View →</button>
         </div>
       </div>
 
@@ -1382,6 +1482,7 @@
           <p class="offjt-card-body">
             同期3人（林・佐藤・戸嶋）で毎週開催した自主勉強会。インプット習慣の定着と学びの言語化を目的に、各自が読んだ記事・本・セミナーの気づきを持ち寄り、次のアクションまで落とし込む形式で継続。年次の近いメンバー同士で悩みや疑問を気軽に解消し合う場にもなりました。
           </p>
+          <button class="offjt-card-btn" onclick="openModal('modal-card3')">View →</button>
         </div>
       </div>
 
@@ -1433,6 +1534,298 @@
 <section id="closing">
   <img src="closing-img.jpg" alt="長い間くそお世話になりました!!!" style="display:block;max-width:100%;height:auto;margin:0 auto;">
 </section>
+
+
+<!-- ════════════════════════
+     MODALS
+════════════════════════ -->
+
+<!-- Modal Card 1: Learning Portfolio -->
+<div id="modal-card1" class="modal-overlay" onclick="if(event.target===this)closeModal('modal-card1')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="modal-header-title">デザイナーがコードとAIを用いて</span>
+      <button class="modal-close" onclick="closeModal('modal-card1')">✕</button>
+    </div>
+    <div class="modal-body">
+      <iframe class="modal-iframe" src="https://haru1113-cloud.github.io/cs-portfolio1/" title="Learning Portfolio"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Card 2: メシリスト -->
+<div id="modal-card2" class="modal-overlay" onclick="if(event.target===this)closeModal('modal-card2')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="modal-header-title">メシリスト</span>
+      <button class="modal-close" onclick="closeModal('modal-card2')">✕</button>
+    </div>
+    <div class="modal-body">
+      <iframe class="modal-iframe" src="https://www.meshilist.com/" title="メシリスト"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Card 3: のんびり前進会 -->
+<div id="modal-card3" class="modal-overlay" onclick="if(event.target===this)closeModal('modal-card3')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <span class="modal-header-title">のんびり前進会</span>
+      <button class="modal-close" onclick="closeModal('modal-card3')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-doc">
+
+        <div class="modal-doc-intro">
+          <p>
+            <strong>🧃 目的</strong><br>
+            定期的に報告の機会を作ることで、インプット習慣を身につける。学んだことを言語化することで、自分に落とし込む。年次の近いメンバー同士で、悩みや疑問を気軽に解消し合う。<br><br>
+            <strong>📝 FMT</strong>：インプットしたこと / 今週の学び（3つ以内・概念化）/ NA（次のアクション）/ 今の悩みや相談したいこと
+          </p>
+        </div>
+
+        <!-- 2026-03-24 -->
+        <div class="modal-meeting">
+          <p class="modal-meeting-date">2026.03.24 ── 参加者：林治哉・佐藤百恵・戸嶋咲</p>
+          <div class="modal-person">
+            <p class="modal-person-name">【林】</p>
+            <p class="modal-person-section">インプット</p>
+            <ul>
+              <li>AI禁止令 ── AIにこう言われたので、という思考を遮断する使い方は良くない。最初のパターンをいくつかAIに出してもらい、デザイン判断はこちらが持つ</li>
+              <li>なぜそのWebデザインデータは実装で困るのか ── 自分とコーダーさんが持つ情報の粒度は違う。ホバー挙動・シャドウトークン・メディアクエリ設定など、思っているよりかなり細かく指定が必要</li>
+              <li>自分の苦手なところ ── 安易な答えに飛びつかず、物事の幹を掴みにいく。AIとの壁打ちでも思考を止めない</li>
+            </ul>
+            <p class="modal-person-section">今週の学び</p>
+            <ul>
+              <li>FBのFB ── 大林さんからFBをいただく時、最後5分で自分のFBのもらい方が適切だったかを聞く</li>
+              <li>MTG序盤に「前回はこういった形で進めていました」と思い出してもらう時間をとる</li>
+              <li>自分の持っている情報の粒度が相手も揃っているとは限らない</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2026-03-17 -->
+        <div class="modal-meeting">
+          <p class="modal-meeting-date">2026.03.17 ── 参加者：林治哉・佐藤百恵・戸嶋咲</p>
+          <div class="modal-person">
+            <p class="modal-person-name">【佐藤】</p>
+            <ul>
+              <li>デザインシステムのイベント参加 ── 他企業のDS推進が進みすぎていて焦り。最短でコンポーネント設計を終わらせてAI自動化を進めないと</li>
+              <li>Claude Codeをインプット ── 大林さんに概要を伝授してもらい重い一歩目を踏み出せた</li>
+            </ul>
+          </div>
+          <div class="modal-person">
+            <p class="modal-person-name">【戸嶋】</p>
+            <ul>
+              <li>東京科学大学がデザインシステムを一般公開 ── 大学でDSが整っているのがすごい</li>
+              <li>Claude Code入門動画でインプット</li>
+            </ul>
+          </div>
+          <div class="modal-person">
+            <p class="modal-person-name">【林】</p>
+            <p class="modal-person-section">インプット</p>
+            <ul>
+              <li>Webコンテンツが飽和する中どういう体験が大事になるのか ── 「答えだけを教える」要約ニーズが爆発。サイトに流入しない検索が当たり前に</li>
+              <li>効率・タイパを求めてきたからこそ「非効率で不自由な体験」が贅沢として定義され直されている</li>
+              <li>デザインは本当になくなるのか ── AIが奪うのは作業。判断や意図設計、人間特有の感性はなくならない</li>
+            </ul>
+            <p class="modal-person-section">今週の学び</p>
+            <ul>
+              <li>UX大事 ── バナーや図解など点のUXから、遷移先・セクション間の繋がりを線で言語化する必要がある</li>
+              <li>サービスをデプロイする準備中 ── 決済サービス連携・ドメイン・DNS。一旦やってみる精神強め</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2026-03-03 -->
+        <div class="modal-meeting">
+          <p class="modal-meeting-date">2026.03.03 ── 参加者：林治哉・佐藤百恵・戸嶋咲</p>
+          <div class="modal-person">
+            <p class="modal-person-name">【佐藤】</p>
+            <ul>
+              <li>AI時代、デザイナーは本当に「作らなくて」よくなったのか？ ── 問われるのは出てきたアウトプットをどんな基準で見極めるか。判断基準は手を動かしてきた経験の蓄積の上にある</li>
+              <li>課題設定の質＝アウトプットの質</li>
+              <li>ログは自分の財産 ── NotebookLMに週報を全部読み込ませたら引き継ぎ資料を1日で作れた</li>
+            </ul>
+          </div>
+          <div class="modal-person">
+            <p class="modal-person-name">【戸嶋】</p>
+            <ul>
+              <li>起きたことの報告をするときのまとめ方 ── 時系列順で伝え、「起きたこと」と「自分が感じたこと」を分けて伝える</li>
+              <li>最初に「共有だけなのか」「相談したいのか」を伝えてスタンスを揃える</li>
+            </ul>
+          </div>
+          <div class="modal-person">
+            <p class="modal-person-name">【林】</p>
+            <p class="modal-person-section">インプット</p>
+            <ul>
+              <li>Figma to code ── ClaudeでコードをFigmaに持ってきて編集。スクショ＋変更箇所の明記が重要</li>
+              <li>デザインのクオリティを上げるコツ ── 良いデザインをたくさん見る。抽象と具体の行き来</li>
+            </ul>
+            <p class="modal-person-section">今週の学び</p>
+            <ul>
+              <li>経験を積む＋振り返り ── 今やっていることをログとして貯める。次に似た施策を任された時に流れを把握できるように</li>
+              <li>GA4での提案 ── デザインの軸だけでなくマーケのツールからデザインの根拠を提示すると納得感に繋がる</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2026-02-24 -->
+        <div class="modal-meeting">
+          <p class="modal-meeting-date">2026.02.24 ── 参加者：林治哉・佐藤百恵・戸嶋咲</p>
+          <div class="modal-person">
+            <p class="modal-person-name">【佐藤】</p>
+            <ul>
+              <li>Figmaデザインシステムイベント参加 ── デザインはただのUIライブラリではなく、AIはDSという基盤があることで責務を増幅させる</li>
+              <li>キャリアにロールモデルを求めることは過当競争に飛び込む戦略上愚かな行為 ── 複数の要素を掛け合わせた「キメラ戦略」</li>
+            </ul>
+          </div>
+          <div class="modal-person">
+            <p class="modal-person-name">【林】</p>
+            <p class="modal-person-section">インプット</p>
+            <ul>
+              <li>ClaudeとFigmaを連携 ── 生成したコードをFigmaに持ってきて編集できる。コーディングではなく「何を作るべきか」を判断し言語化する力が必要</li>
+              <li>マイクロインタラクションが重要な要素に ── クリック時のリアクション・ロードの体験など小さな体験が大事になる</li>
+            </ul>
+            <p class="modal-person-section">今週の学び</p>
+            <ul>
+              <li>GA4での提案 ── マーケのツールからデザインの根拠を提示すると納得感に繋がる</li>
+              <li>モヤモヤはそのままにしない ── すぐに相談すること</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2026-02-17 -->
+        <div class="modal-meeting">
+          <p class="modal-meeting-date">2026.02.17 ── 参加者：林治哉・佐藤百恵・戸嶋咲</p>
+          <div class="modal-person">
+            <p class="modal-person-name">【佐藤】</p>
+            <ul>
+              <li>デザイナーの武器が変わる ── 「絵を描く力」から「体験を言語化する力」へ</li>
+              <li>CLAUDE.mdにデザインシステムの仕様を書いておけばClaude Codeが自動で読み込む</li>
+            </ul>
+          </div>
+          <div class="modal-person">
+            <p class="modal-person-name">【戸嶋】</p>
+            <ul>
+              <li>「クリエイティブな人」とは ── 前提を疑い、自分なりの仮説を持ち、伝わる形にする</li>
+              <li>FigmaでUIデザインしている時点で、もう遅いのかもしれない</li>
+            </ul>
+          </div>
+          <div class="modal-person">
+            <p class="modal-person-name">【林】</p>
+            <p class="modal-person-section">インプット</p>
+            <ul>
+              <li>デザインの上流過程の振り返り ── 自社分析・ターゲット設定・競合調査を忘れがちになっていたため振り返り</li>
+              <li>Claude code触ってみて ── 留学系サイトを作成。デザイン性もページ遷移もかなり高い解像度</li>
+            </ul>
+            <p class="modal-person-section">今週の学び</p>
+            <ul>
+              <li>批判的思考大事 ── レビュー会等で「それってなんなの？」という視点を持つことで学べることが多い</li>
+              <li>自分の中の良いと思う軸を明確にする ── 今回の施策はどんなユーザーをどんな行動に繋げたいのかを軸に</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2026-02-10 -->
+        <div class="modal-meeting">
+          <p class="modal-meeting-date">2026.02.10 ── 参加者：林治哉・佐藤百恵・戸嶋咲</p>
+          <div class="modal-person">
+            <p class="modal-person-name">【佐藤】</p>
+            <ul>
+              <li>なぜデザインシステムは丸コピできないのか ── 参考にすべきは「形」ではなく「判断の痕跡」</li>
+              <li>全ての根本は「専門性」 ── 日々のインプットが重要</li>
+              <li>情報共有での注意点 ── 既存の批判をしない。今の状況だったらこうするのが適切という軸で話す</li>
+            </ul>
+          </div>
+          <div class="modal-person">
+            <p class="modal-person-name">【林】</p>
+            <p class="modal-person-section">インプット</p>
+            <ul>
+              <li>「頭の回転が速い」とはどんな状態か ── 問いの引き出しが多い・知識と経験を汎用化・大量のインプット</li>
+              <li>Storybookの導入方法を学習中</li>
+            </ul>
+            <p class="modal-person-section">今週の学び</p>
+            <ul>
+              <li>数値を使う場面 ── ユーザー属性によって構成が変わる。20代・高卒・中卒それぞれに響く設計</li>
+              <li>イラストの線の太さで優先度をつけてはいけない</li>
+              <li>問題は他責、解決は自責</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2026-02-03 -->
+        <div class="modal-meeting">
+          <p class="modal-meeting-date">2026.02.03 ── 参加者：林治哉・佐藤百恵・戸嶋咲</p>
+          <div class="modal-person">
+            <p class="modal-person-name">【林】</p>
+            <p class="modal-person-section">インプット</p>
+            <ul>
+              <li>AI時代でも陳腐化しないコミュニケーションデザイン ── アウトプットの量産ではなく人間ならではの意思決定。ユーザーが「誰になりたいか」というライフゴールの設計に注力</li>
+            </ul>
+            <p class="modal-person-section">今週の学び</p>
+            <ul>
+              <li>タスク分解は実績値から ── 先週どのくらい進んだかから来週の進捗を予測。楽観的な数字と悲観的な数字を持つ</li>
+              <li>MTGは準備が9割 ── このMTGの目的・ゴールを事前に整理。朝会・夕会でもFBをもらいたいポイントを事前にSlackで送る</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2026-01-20 -->
+        <div class="modal-meeting">
+          <p class="modal-meeting-date">2026.01.20 ── 参加者：林治哉・佐藤百恵・戸嶋咲</p>
+          <div class="modal-person">
+            <p class="modal-person-name">【佐藤】</p>
+            <ul>
+              <li>事業課題を解決するデザイナーになるために ── デザインのアプローチを「アウトプット制作」ではなく「課題の前提整理」に向ける</li>
+              <li>コミュニケーションの仕方で仕事のスピードは変わる ── 選択肢で提示する・5分口頭で話して決める</li>
+            </ul>
+          </div>
+          <div class="modal-person">
+            <p class="modal-person-name">【林】</p>
+            <p class="modal-person-section">インプット</p>
+            <ul>
+              <li>命名規則を振り返り ── コンポーネントはアッパーキャメル。instanceslotも確認</li>
+              <li>AWSとは ── インターネット上でサーバーやデータ保存場所を借りられるサービス</li>
+              <li>日本と欧米のサイトの違い・ジャンプ率 ── フォントサイズだけでなく色やウェイトでも雰囲気を作る</li>
+            </ul>
+            <p class="modal-person-section">今週の学び</p>
+            <ul>
+              <li>本のタイトルを作る（概念化・仕事を早く進めるには分解）</li>
+              <li>開発側の用語をしっかりと理解する</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2026-01-13 -->
+        <div class="modal-meeting">
+          <p class="modal-meeting-date">2026.01.13 ── 参加者：林治哉・佐藤百恵・戸嶋咲</p>
+          <div class="modal-person">
+            <p class="modal-person-name">【佐藤】</p>
+            <ul>
+              <li>デザインシステムと開発生産性改善 ── 振り返りをしていたから順調に進んでいる</li>
+              <li>コンポーネント設計に着手する前に理想状態を必ず明確にする ── 終わりがないものだからこそどこまでやるかを共通認識としておく</li>
+            </ul>
+          </div>
+          <div class="modal-person">
+            <p class="modal-person-name">【戸嶋】</p>
+            <ul>
+              <li>実務 ── 100%理解できるまで聞く！コーダー業務委託さんの抱えている問題をキャッチアップすることがマスト</li>
+            </ul>
+          </div>
+          <div class="modal-person">
+            <p class="modal-person-name">【林】</p>
+            <p class="modal-person-section">インプット</p>
+            <ul>
+              <li>デザインシステム基礎 ── そもそもデザインシステムとは何か・どんなプロセスで作成されるのか・躓きやすいところ（初期コスト可視化・メンテナンス・コミュニケーション）</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <!-- ════════════════════════
@@ -1603,6 +1996,23 @@
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 }());
+
+/* ── Modal ── */
+function openModal(id) {
+  document.getElementById(id).classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('is-open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.is-open').forEach(function(el) {
+      closeModal(el.id);
+    });
+  }
+});
 </script>
 
 </body>
