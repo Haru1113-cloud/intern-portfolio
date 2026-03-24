@@ -785,6 +785,72 @@
     }
 
     /* ════════════════════════════════
+       MATOME (統括)
+    ════════════════════════════════ */
+    #matome {
+      background: var(--white);
+      padding: 140px 10% 120px;
+      border-top: 1px solid var(--border);
+    }
+
+    .matome-inner { max-width: 960px; margin: 0 auto; }
+
+    .matome-eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px; font-weight: 700; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--text-2);
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .matome-eyebrow::before {
+      content: ''; width: 24px; height: 2px;
+      background: var(--green); border-radius: 2px;
+    }
+
+    .matome-title {
+      font-family: 'M PLUS 1p', sans-serif;
+      font-size: clamp(32px, 4.5vw, 60px); font-weight: 800;
+      line-height: 1.15; margin-bottom: 64px;
+      color: var(--text);
+    }
+    .matome-title em { font-style: normal; color: var(--green); }
+
+    .matome-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .matome-block {
+      background: #F8F8F6;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 36px;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+
+    .matome-block-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 8px; font-weight: 700; letter-spacing: .25em;
+      text-transform: uppercase; color: var(--green);
+    }
+
+    .matome-block-title {
+      font-family: 'M PLUS 1p', sans-serif;
+      font-size: 18px; font-weight: 800;
+      color: var(--text); line-height: 1.5;
+    }
+
+    .matome-block-body {
+      font-size: 13px; color: var(--text-2); line-height: 2;
+    }
+
+    @media (max-width: 768px) {
+      .matome-grid { grid-template-columns: 1fr; }
+      #matome { padding: 80px 6% 80px; }
+    }
+
+    /* ════════════════════════════════
        CLOSING
     ════════════════════════════════ */
     #closing {
@@ -907,6 +973,7 @@
     <li><a href="#story">施策</a></li>
     <li><a href="#growth">成長</a></li>
     <li><a href="#offjt">OFFJT</a></li>
+    <li><a href="#matome">統括</a></li>
     <li><a href="#closing">これから</a></li>
   </ul>
 </nav>
@@ -1314,6 +1381,42 @@
         <p class="offjt-card-body">
           どんなサービスを作ったか、どんな課題を解決しようとしたか、
           使った技術スタックなどを簡潔に書いてください。
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════
+     MATOME (統括)
+════════════════════════ -->
+<section id="matome">
+  <div class="matome-inner">
+
+    <p class="matome-eyebrow reveal">INTERNSHIP SUMMARY</p>
+    <h2 class="matome-title reveal">統括</h2>
+
+    <div class="matome-grid">
+
+      <!-- Block 1: 学びと課題 -->
+      <div class="matome-block reveal">
+        <span class="matome-block-label">Learnings & Challenges</span>
+        <h3 class="matome-block-title">得た学びと課題</h3>
+        <p class="matome-block-body">
+          インターンを通じて得た学び・気づき・課題をここに記載してください。<br>
+          例）施策を通して仮説検証の重要性を実感した、デザインと数字を繋げる視点が身についた、など。
+        </p>
+      </div>
+
+      <!-- Block 2: 正社員になってから -->
+      <div class="matome-block reveal">
+        <span class="matome-block-label">Next Direction</span>
+        <h3 class="matome-block-title">正社員になってから<br>目指す方向</h3>
+        <p class="matome-block-body">
+          正社員になってからどのような方向で動いていきたいか、ここに記載してください。<br>
+          例）事業貢献できるデザイナーとして…、○○の領域を深めていきたい、など。
         </p>
       </div>
 
